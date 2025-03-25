@@ -35,38 +35,39 @@ function renderTask(task) {
     taskList.appendChild(taskRow);
 }
 
-function createTask() {
-    lastTaskId++;
-    const task = {
-        id: lastTaskId,
-        name: 'Task ' + lastTaskId,
-        completed: false
-    };
-    tasks.push(task);
-    return task;
-}
+//function createTask() {
+//    lastTaskId++;
+//   const task = {
+//        id: lastTaskId,
+//        name: 'Task ' + lastTaskId,
+//        completed: false
+//    };
+//    tasks.push(task);
+//    return task;
+//}
 
 
 let cookie = "XZqSL1M9YhGPLCMcW1hnGU5v5hpmP9ej"
 
 async function createTask(title, desc)
  {
+    lastTaskId++;
     const res = await
 fetch("https://demo2.z-bit.ee/tasks", {
     method: "POST",
     headers: {
         "Content-Type":
         "application/json",
-        Authorization: "Bearer" + cookie,
+        Authorization: `Bearer ${cookie}`,
     },
     body: JSON.stringify({
-        title,
-        desc,
+        title: 'Task ' + lastTaskId,
+        desc: 'Something',
     }),
 });
-
     const data = await res.json()
-    
+    console.log('Task created:', data);
+
 }
 
 function createTaskRow(task) {
