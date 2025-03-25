@@ -46,6 +46,29 @@ function createTask() {
     return task;
 }
 
+
+let cookie = "XZqSL1M9YhGPLCMcW1hnGU5v5hpmP9ej"
+
+async function createTask(title, desc)
+ {
+    const res = await
+fetch("https://demo2.z-bit.ee/tasks", {
+    method: "POST",
+    headers: {
+        "Content-Type":
+        "application/json",
+        Authorization: "Bearer" + cookie,
+    },
+    body: JSON.stringify({
+        title,
+        desc,
+    }),
+});
+
+    const data = await res.json()
+    
+}
+
 function createTaskRow(task) {
     let taskRow = document.querySelector('[data-template="task-row"]').cloneNode(true);
     taskRow.removeAttribute('data-template');
@@ -106,3 +129,23 @@ function hydrateAntCheckboxes(element) {
         });
     }
 }
+
+
+
+
+//    {
+//        "username": "Tauri.Tammela@tptlive.ee",
+//        "firstname": "Tauri",
+//        "lastname": "Tammela",
+//        "newPassword": "Password"
+//    }
+//
+//
+//    {
+//        "id": 1039,
+//        "username": "Tauri.Tammela@tptlive.ee",
+//        "firstname": "Tauri",
+//        "lastname": "Tammela",
+//        "created_at": "2025-03-25 14:24:14",
+//        "access_token": "XZqSL1M9YhGPLCMcW1hnGU5v5hpmP9ej"
+//    }
