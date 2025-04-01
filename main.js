@@ -19,7 +19,8 @@ let addTask;
 window.addEventListener('load', () => {
     taskList = document.querySelector('#task-list');
     addTask = document.querySelector('#add-task');
-
+    readTask();
+    updateTask();
     tasks.forEach(renderTask);
 
     // kui nuppu vajutatakse siis lisatakse uus task
@@ -49,7 +50,7 @@ function renderTask(task) {
 
 let cookie = "XZqSL1M9YhGPLCMcW1hnGU5v5hpmP9ej"
 
-async function createTask(title, desc)
+async function createTask()
  {
     lastTaskId++;
     const res = await
@@ -67,8 +68,77 @@ fetch("https://demo2.z-bit.ee/tasks", {
 });
     const data = await res.json()
     console.log('Task created:', data);
-
 }
+
+async function readTask() {
+    try {
+        const response = await fetch("https://demo2.z-bit.ee/tasks", {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${cookie}`,
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Tasks read:', data);
+
+        // Clear existing tasks
+        while (taskList.firstChild) {
+            taskList.removeChild(taskList.firstChild);
+        }
+
+        // Render each task
+        data.forEach(task => {
+            const taskRow = createTaskRow({
+                id: task.id,
+                name: task.title,
+                completed: task.completed
+            });
+            taskList.appendChild(taskRow);
+        });
+    } catch (error) {
+        console.error('Error reading tasks:', error);
+    }
+}
+
+
+async function updateTask(taskId, updatedTask) {
+    try {
+        const response = await fetch(`https://demo2.z-bit.ee/tasks/${taskId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${cookie}`,
+            },
+            body: JSON.stringify(updatedTask),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Task updated:', data);
+
+        // Update the task in the UI
+        const taskRow = taskList.querySelector(`[data-task-id="${taskId}"]`);
+        if (taskRow) {
+            const nameInput = taskRow.querySelector("[name='name']");
+            nameInput.value = updatedTask.title;
+
+            const checkbox = taskRow.querySelector("[name='completed']");
+            checkbox.checked = updatedTask.completed;
+        }
+    } catch (error) {
+        console.error('Error updating task:', error);
+    }
+}
+
+
 
 function createTaskRow(task) {
     let taskRow = document.querySelector('[data-template="task-row"]').cloneNode(true);
