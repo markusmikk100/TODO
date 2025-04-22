@@ -14,7 +14,9 @@
 	</head>
 
 	<body>
+		<div type="flex"></div>
 		<div
+			id="task-container"
 			type="flex"
 			class="ant-row ant-row-center"
 			style="min-height: 100vh; margin-top: 6rem"
@@ -24,10 +26,107 @@
 				<button id="add-task" type="button" class="ant-btn ant-btn-default">
 					Add Task
 				</button>
+				<button id="add-login" type="button" class="ant-btn ant-btn-default">
+					Sign out
+				</button>
 				<div class="ant-divider ant-divider-horizontal" role="separator"></div>
 
 				<div class="ant-list ant-list-sm ant-list-split ant-list-bordered">
 					<ul id="task-list" class="ant-list-items"></ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- Login screen -->
+		<div
+			id="login-container"
+			class="ant-row ant-row-center"
+			style="min-height: 100vh; margin-top: 6rem; display: none"
+		>
+			<div class="ant-col ant-col-12">
+				<h1>Welcome</h1>
+				<div role="tablist" class="ant-tabs-nav">
+					<div class="ant-tabs-nav-wrap">
+						<div class="ant-tabs-nav-list">
+							<div
+								class="ant-tabs-tab ant-tabs-tab-active"
+								role="tab"
+								tabindex="0"
+								aria-selected="true"
+								aria-controls="login-tab"
+								id="login-tab-btn"
+							>
+								Log In
+							</div>
+							<div
+								class="ant-tabs-tab"
+								role="tab"
+								tabindex="-1"
+								aria-selected="false"
+								aria-controls="create-tab"
+								id="create-tab-btn"
+							>
+								Create Account
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ant-tabs-content ant-tabs-content-top">
+					<div
+						role="tabpanel"
+						id="login-tab"
+						aria-labelledby="login-tab-btn"
+						class="ant-tabs-tabpane ant-tabs-tabpane-active"
+					>
+						<form id="login-form" style="margin-top: 1rem">
+							<label>Email:</label>
+							<input
+								type="email"
+								class="ant-input"
+								style="margin-bottom: 1rem"
+							/>
+							<label>Password:</label>
+							<input
+								type="password"
+								class="ant-input"
+								style="margin-bottom: 1rem"
+							/>
+							<button type="submit" class="ant-btn ant-btn-primary">
+								Log In
+							</button>
+						</form>
+					</div>
+					<div
+						role="tabpanel"
+						id="create-tab"
+						aria-labelledby="create-tab-btn"
+						class="ant-tabs-tabpane"
+						style="display: none; margin-top: 1rem"
+					>
+						<form id="create-form">
+							<label>Email:</label>
+							<input
+								type="email"
+								class="ant-input"
+								style="margin-bottom: 1rem"
+							/>
+							<label>Password:</label>
+							<input
+								type="password"
+								class="ant-input"
+								style="margin-bottom: 1rem"
+							/>
+							<label>Confirm Password:</label>
+							<input
+								type="password"
+								class="ant-input"
+								style="margin-bottom: 1rem"
+							/>
+							<button type="submit" class="ant-btn ant-btn-primary">
+								Create Account
+							</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
