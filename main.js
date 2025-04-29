@@ -105,19 +105,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				const data = await response.json();
 				accessToken = data.access_token;
-				setCookie("access_token", accessToken, 365); // Store token as cookie
-				localStorage.setItem("access_token", accessToken); // Store token
+				setCookie("access_token", accessToken, 365);
+				localStorage.setItem("access_token", accessToken); 
 				cookie = accessToken;
 				loginContainer.style.display = "none";
 				taskContainer.style.display = "flex";
-				readTask(); // Load tasks after login
+				readTask();
 			} catch (error) {
 				console.error("Login error:", error);
 				alert("Login failed: Could not connect to the server.");
 			}
 		});
 
-	// Handle create account form submission
 	document
 		.getElementById("create-form")
 		.addEventListener("submit", async (e) => {
@@ -158,13 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				const data = await response.json();
 				accessToken = data.access_token;
-				setCookie("access_token", accessToken, 365); // Store token as cookie
-				localStorage.setItem("access_token", accessToken); // Store token
+				setCookie("access_token", accessToken, 365);
+				localStorage.setItem("access_token", accessToken);
 				cookie = accessToken;
 
 				loginContainer.style.display = "none";
 				taskContainer.style.display = "flex";
-				readTask(); // Load tasks after account creation
+				readTask();
 			} catch (error) {
 				console.error("Account creation error:", error);
 				alert("Account creation failed: Could not connect to the server.");
